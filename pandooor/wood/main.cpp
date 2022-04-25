@@ -93,14 +93,12 @@ int main()
         cerr << "opp_heroes array size is: " << opp_heroes.size() << endl;
         cerr << "monsters array size is: " << monsters.size() << endl;
 
-
         std::list<Entity>::iterator iterator;
         for (iterator = monsters.begin(); iterator != monsters.end(); ++iterator) {
             iterator->calculate_distance_to_target(base_x, base_y);
         }
         monsters.sort([](const Entity & a, const Entity & b) { return a.distance_to_base < b.distance_to_base; });
 
-//        auto monsters_front = monsters.begin();
         for (int i = 0; i < heroes_per_player; i++) {
             Entity target;
 
@@ -108,33 +106,17 @@ int main()
                 target = monsters.front();
                 cerr << "target monsters id: " << target.id << " and distance_to_base: " << target.distance_to_base << endl;
                 cout << "MOVE " << target.x << " " << target.y << endl;
+                monsters.pop_front();
             } else {
                 cout << "MOVE " << 8500 << " " << 4500 << endl;
-//                cout << "WAIT" << endl;
             }
-
 
             // Write an action using cout. DON'T FORGET THE "<< endl"
             // To debug: cerr << "Debug messages..." << endl;
 
-
             // In the first league: MOVE <x> <y> | WAIT; In later leagues: | SPELL <spellParams>;
 
         }
-
-        //TODO upper defender
-        //  patrol between x = 4500, y = 4500 and x = 6000, y = 800
-        //  jump to the resque if something got inside the base circle
-
-
-        //TODO lower defender
-        //  patrol between x = 4500, y = 4500 and x = 800, y = 6000
-        //  jump to the resque if something got inside the base circle
-
-
-        //TODO aggressor
-
-
     }
 }
 
